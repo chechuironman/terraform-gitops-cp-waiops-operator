@@ -11,7 +11,7 @@ SERVER_NAME="default"
 TYPE="base"
 LAYER="2-services"
 
-COMPONENT_NAME="ibm-mq"
+COMPONENT_NAME="ibm-waiops"
 
 mkdir -p .testrepo
 
@@ -21,21 +21,21 @@ cd .testrepo || exit 1
 
 find . -name "*"
 
-if [[ ! -f "./argocd/2-services/cluster/default/operators/${NAMESPACE}-ibm-mq-operator.yaml" ]]; then
-  echo "ArgoCD config missing - ./argocd/2-services/cluster/default/operators/${NAMESPACE}-ibm-mq-operator.yaml"
+if [[ ! -f "./argocd/2-services/cluster/default/operators/${NAMESPACE}-ibm-waiops-operator.yaml" ]]; then
+  echo "ArgoCD config missing - ./argocd/2-services/cluster/default/operators/${NAMESPACE}-ibm-waiops-operator.yaml"
   exit 1
 fi
 
 echo "Printing argocd/${LAYER}/cluster/${SERVER_NAME}/${TYPE}/${NAMESPACE}-${COMPONENT_NAME}.yaml"
-cat "./argocd/2-services/cluster/default/operators/${NAMESPACE}-ibm-mq-operator.yaml"
+cat "./argocd/2-services/cluster/default/operators/${NAMESPACE}-ibm-waiops-operator.yaml"
 
-if [[ ! -f "./payload/2-services/namespace/${NAMESPACE}/ibm-mq-operator/values.yaml" ]]; then
-  echo "Application values not found - ./payload/2-services/namespace/${NAMESPACE}/ibm-mq-operator/values.yaml"
+if [[ ! -f "./payload/2-services/namespace/${NAMESPACE}/ibm-waiops-operator/values.yaml" ]]; then
+  echo "Application values not found - ./payload/2-services/namespace/${NAMESPACE}/ibm-waiops-operator/values.yaml"
   exit 1
 fi
 
-echo "Printing ./payload/2-services/namespace/${NAMESPACE}/ibm-mq-operator/values.yaml"
-cat "./payload/2-services/namespace/${NAMESPACE}/ibm-mq-operator/values.yaml"
+echo "Printing ./payload/2-services/namespace/${NAMESPACE}/ibm-waiops-operator/values.yaml"
+cat "./payload/2-services/namespace/${NAMESPACE}/ibm-waiops-operator/values.yaml"
 
 count=0
 until kubectl get namespace "${NAMESPACE}" 1> /dev/null 2> /dev/null || [[ $count -eq 20 ]]; do
@@ -68,19 +68,19 @@ if [[ $count -eq 20 ]]; then
 fi
 
 count=0
-until kubectl get csv -n "${NAMESPACE}" -o json | "${BIN_DIR}/jq" -r '.items[] | .metadata.name' | grep -q ibm-mq || [[ $count -eq 20 ]]; do
-  echo "Waiting for ibm-mq csv in ${NAMESPACE}"
+until kubectl get csv -n "${NAMESPACE}" -o json | "${BIN_DIR}/jq" -r '.items[] | .metadata.name' | grep -q ibm-aiops-orchestrator || [[ $count -eq 20 ]]; do
+  echo "Waiting for ibm-aiops-orchestrator csv in ${NAMESPACE}"
   count=$((count + 1))
   sleep 60
 done
 
 if [[ $count -eq 20 ]]; then
-  echo "Timed out waiting for ibm-mq csv in ${NAMESPACE}"
+  echo "Timed out waiting for ibm-aiops-orchestrator csv in ${NAMESPACE}"
   kubectl get csv -n "${NAMESPACE}"
   exit 1
 fi
 
-CSV=$(kubectl get csv -n "${NAMESPACE}" -o json | "${BIN_DIR}/jq" -r '.items[] | .metadata.name' | grep ibm-mq)
+CSV=$(kubectl get csv -n "${NAMESPACE}" -o json | "${BIN_DIR}/jq" -r '.items[] | .metadata.name' | grep ibm-aiops-orchestrator)
 echo "Found csv ${CSV} in ${NAMESPACE}"
 
 cd ..
