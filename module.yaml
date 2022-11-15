@@ -1,12 +1,12 @@
-name: gitops-cp-mq
+name: gitops-cp-waiops
 type: terraform
-description: Module to populate a gitops repository with the resources to provision the MQ operator from IBM Cloud Pak for Integration.
+description: Module to populate a gitops repository with the resources to provision the WAIOPS Orchestrator operator from IBM Cloud Pak for WAIOPS.
 tags:
   - gitops
   - ibm
   - cloud pak
   - operator
-  - mq
+  - waiops
 versions:
   - platforms:
       - ocp4
@@ -21,10 +21,6 @@ versions:
       - id: catalogs
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git
-            version: ">= 1.0.0"
-      - id: dep-manager
-        refs:
-          - source: github.com/cloud-native-toolkit/terraform-cp4i-dependency-management.git
             version: ">= 1.0.0"
     variables:
       - name: gitops_config
@@ -43,7 +39,3 @@ versions:
         moduleRef:
           id: catalogs
           output: catalog_ibmoperators
-      - name: channel
-        moduleRef:
-          id: dep-manager
-          output: mq.channel

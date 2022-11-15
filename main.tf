@@ -1,19 +1,19 @@
 locals {
-  name          = "ibm-mq-operator"
+  name          = "ibm-waiops-operator"
   yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   layer = "services"
   type  = "operators"
   application_branch = "main"
   layer_config = var.gitops_config[local.layer]
     values_content = {
-      "ibm-mq-operator" = {
+      "ibm-waiops-operator" = {
         subscriptions = {
-          ibmmq = {
-            name = "ibm-mq"
+          ibmwaiops = {
+            name = "ibm-aiops-orchestrator"
             subscription = {
               channel = var.channel
               installPlanApproval = "Automatic"
-              name = "ibm-mq"
+              name = "ibm-aiops-orchestrator"
               source = var.catalog
               sourceNamespace = var.catalog_namespace
             }

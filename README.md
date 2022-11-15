@@ -1,6 +1,6 @@
-# IBM Cloud Pak MQ module
+# IBM Cloud Pak WAIOPS module
 
-Module to populate a gitops repository with the MQ operator from IBM Cloud Pak for Integration.
+Module to populate a gitops repository with the WAIOPS Orchestrator operator from IBM Cloud Pak for WAIOPS.
 
 ## Software dependencies
 
@@ -20,20 +20,18 @@ This module makes use of the output from other modules:
 
 - GitOps - github.com/cloud-native-toolkit/terraform-tools-gitops.git
 - Catalogs - github.com/cloud-native-toolkit/terraform-gitops-cp-catalogs.git
-- Plaform Navigator - github.com/cloud-native-toolkit/terraform-gitops-cp-platform-navigator.git
 
 ## Example usage
 
 ```hcl-terraform
-module "mq" {
-  source = "github.com/cloud-native-toolkit/terraform-gitops-cp-mq.git"
+module "waiops" {
+  source = "github.com/cloud-native-toolkit/terraform-gitops-cp-waiops-operator.git"
 
   gitops_config = module.gitops.gitops_config
   git_credentials = module.gitops.git_credentials
   server_name = module.gitops.server_name
   kubeseal_cert = module.argocd-bootstrap.sealed_secrets_cert
   catalog = module.cp_catalogs.catalog_ibmoperators
-  platform_navigator_name = module.cp_platform_navigator.name
 }
 ```
 
