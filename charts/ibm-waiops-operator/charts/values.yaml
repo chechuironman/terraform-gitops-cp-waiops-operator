@@ -4,7 +4,7 @@ ibm-cp4waiops-operator:
   subscriptions:
     namespace:
     subscription:
-      channel: v3.4
+      channel: v3.5
       config:
         resources: {}
       installPlanApproval: Automatic
