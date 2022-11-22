@@ -61,16 +61,16 @@ resource null_resource create_yaml {
   }
 }
 
-resource gitops_module module {
-  depends_on = [null_resource.create_yaml]
+# resource gitops_module module {
+#   depends_on = [null_resource.create_yaml]
 
-  name = local.name
-  namespace = local.namespace
-  content_dir = local.yaml_dir
-  server_name = var.server_name
-  layer = local.layer
-  type = local.type
-  branch = local.application_branch
-  config = yamlencode(var.gitops_config)
-  credentials = yamlencode(var.git_credentials)
-}
+#   name = local.name
+#   namespace = local.namespace
+#   content_dir = local.yaml_dir
+#   server_name = var.server_name
+#   layer = local.layer
+#   type = local.type
+#   branch = local.application_branch
+#   config = yamlencode(var.gitops_config)
+#   credentials = yamlencode(var.git_credentials)
+# }
