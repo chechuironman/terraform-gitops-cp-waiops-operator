@@ -27,7 +27,7 @@ output "layer" {
   description = "The layer where the module is deployed"
   value       = local.layer
   depends_on  = [gitops_module.module]
-
+}
 output "type" {
   description = "The type of module where the module is deployed"
   value       = local.type
