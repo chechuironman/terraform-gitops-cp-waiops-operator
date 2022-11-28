@@ -1,4 +1,5 @@
 locals {
+  namespace=var.namespace_waiops
   name          = "ibm-waiops-operator"
   yaml_dir      = "${path.cwd}/.tmp/${local.name}/chart/${local.name}"
   layer = "services"
