@@ -10,6 +10,7 @@ variable "cluster_password" {
 
 variable "server_url" {
   type        = string
+  default = "https://console-openshift-console.itzroks-chechu-jk9nythw-acb0d6465bfd499d92ae3d17a0e3484d-0000.br-sao.containers.appdomain.cloud/"
 }
 
 variable "git_username" {

@@ -11,7 +11,7 @@ SERVER_NAME="default"
 TYPE="base"
 LAYER="2-services"
 
-COMPONENT_NAME="ibm-mq"
+COMPONENT_NAME="ibm-waiops"
 
 mkdir -p .testrepo
 
